@@ -1,0 +1,28 @@
+Less paper. More order.
+
+Scan & Organize turns your compatible Fire tablet into a straightforward document scanner and local document library. Keep receipts, letters and everyday paperwork together without creating an account inside the app.
+
+CAPTURE AND CLEAN UP
+Use the camera or choose a document photo. Adjust four corners by hand to crop and straighten the page, improve contrast and sharpness, or choose black and white. Review the result and retake a page before saving.
+
+BUILD MULTI-PAGE DOCUMENTS
+Add more pages, drag thumbnails into order and remove pages you do not need. Give the document a useful name and choose its folder before saving.
+
+KEEP PAPERWORK ORGANIZED
+Create, rename and delete folders. Browse real document thumbnails, search document names across folders, and swipe through saved pages. Rename or delete documents when needed. Deleting a folder moves its documents to the default folder rather than deleting them.
+
+EXPORT ONE PDF
+Combine the pages into a single PDF and use the native file-save picker. If no system save picker is available, the app offers native sharing. Available destinations depend on the tablet and its installed providers. There is no in-app subscription or PDF-export purchase.
+
+LOCAL DOCUMENT PROCESSING
+Scanning, image cleanup, organization and PDF creation run locally on a compatible tablet. The app does not automatically upload your document library or provide cloud synchronization. Export important documents: clearing app data, uninstalling or losing the device can remove the local library. Other apps you choose when saving or sharing handle those exported copies under their own practices.
+
+ONE-TIME PURCHASE
+Pay for the app through the Amazon Appstore before download. All listed app features are included, with no subscriptions, in-app purchases or advertising SDK integrated by the publisher.
+
+COMPATIBILITY AND LIMITS
+For touchscreen Fire tablets running Fire OS 7/8 with Amazon System WebView based on Chromium 111 or newer. A Fire OS version alone does not guarantee WebView compatibility. Fire TV, Kindle e-readers and Fire OS 5/6 are not supported by this build.
+
+Manual crop; no OCR, automatic edge detection or post-save page editing. Up to 40 pages per document, with images resized to a 2,200-pixel longest edge. Photo imports are limited to 30 MB each. JPEG, PNG and WebP are supported; HEIC support depends on the device. Unsaved drafts can be lost if the operating system closes the app.
+
+See the privacy policy for local storage, exports, support and separate Amazon Appstore/platform processing.

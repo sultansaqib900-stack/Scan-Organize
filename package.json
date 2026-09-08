@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "node scripts/next.mjs dev --hostname 0.0.0.0",
-    "build": "node scripts/next.mjs build && node scripts/build-offline.mjs",
+    "build": "node scripts/build-privacy.mjs && node scripts/next.mjs build && node scripts/build-offline.mjs",
     "preview": "serve out --listen tcp://0.0.0.0:3000 --no-clipboard",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
@@ -15,7 +15,11 @@
     "amazon:sync": "npm run android:sync",
     "amazon:open": "cap open android",
     "amazon:check": "node scripts/check-amazon.mjs",
-    "test:fire": "playwright test --project=fire-hd-8 --project=fire-hd-10"
+    "test:fire": "playwright test --project=fire-hd-8 --project=fire-hd-10",
+    "amazon:release": "node scripts/check-publisher.mjs && npm run amazon:sync",
+    "amazon:submission-check": "node scripts/check-submission.mjs",
+    "amazon:apk-check": "node scripts/check-apk.mjs",
+    "amazon:assets": "node scripts/build-submission-assets.mjs"
   },
   "dependencies": {
     "@capacitor/android": "8.5.1",

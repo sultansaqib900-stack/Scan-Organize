@@ -1,0 +1,5 @@
+Capture or import pages and adjust four corners for manual perspective cropping.
+Improve contrast and sharpness, or choose a black-and-white scan.
+Review, retake, reorder and remove pages before saving a multi-page document.
+Organize scans in folders, search by document name and swipe through saved pages.
+Create one PDF and use native saving or sharing; no in-app purchases or subscriptions.

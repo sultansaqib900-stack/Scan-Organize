@@ -8,9 +8,12 @@ The publication target is Amazon Fire tablets. Start with [AMAZON-APPSTORE.md](A
 | --- | --- |
 | Next.js production static export; no server routes | Passed |
 | TypeScript, ESLint, npm dependency audit | Passed |
-| Storage transactions, crop geometry/filter pixels, actual PDF parsing | 40 unit tests passed |
+| Storage transactions, crop geometry/filter pixels, actual PDF parsing | 51 unit tests passed |
 | Desktop browser workflows, offline reload/export, camera cleanup, accessibility | Passed |
-| Fire HD 8/10-sized and Android touch profiles + the **actual Capacitor 8 native-bridge.js**, simulated OS responses | Passed; included in 31 end-to-end tests |
+| Fire HD 8/10-sized and Android touch profiles + the **actual Capacitor 8 native-bridge.js**, simulated OS responses | Passed; included in 37 end-to-end tests |
+| Offline privacy view, focus/Back behavior and accessibility | Passed in browser/bridge contracts |
+| Publisher/metadata validation and decoded-manifest parser fixtures | Passed; not a real APK inspection |
+| Native release-privacy Gradle guard and SDK-based APK inspection | **Not executed here** — no JDK/SDK or attached APK |
 | Chromium 111 renderer floor (full end-to-end suite) | Passed; not an Amazon OS/WebView image |
 | Real Fire/Android Java/Gradle compilation, Amazon/OEM WebView, camera hardware, native Filesystem/FileProvider/PdfSave/Share | **Not executed here** — no JDK/SDK/emulator/device |
 
@@ -54,6 +57,7 @@ Use a Fire OS 7 tablet and a Fire OS 8 tablet you intend to enable, with their c
 - [ ] Android Back closes the top dialog/view. Back on an unsaved draft asks to discard. Back at the library minimizes the app instead of navigating to a nonexistent URL.
 - [ ] Test a large document near the 40-page limit on the lowest-memory supported device. Ensure no black/empty canvas frames or PDF memory failures.
 - [ ] Upgrade the APK **without uninstalling** and confirm saved data survives. Inspect the merged release manifest: CAMERA only, no INTERNET, shared-storage or microphone permissions; backup/device-transfer disabled.
+- [ ] Open Privacy & support offline; verify the real publisher/contact, effective date and full policy match the public HTTPS URL. Release APKs must not display the draft banner.
 - [ ] Verify release builds have no live-reload URL or web debugging override. Use your own release signing key. No payments or billing SDKs are included.
 
 ## API compatibility and native differences

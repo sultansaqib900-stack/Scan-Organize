@@ -27,13 +27,13 @@ export default defineConfig({
       name: 'fire-hd-8',
       use: { viewport: { width: 600, height: 960 }, deviceScaleFactor: 4 / 3, isMobile: true, hasTouch: true,
         userAgent: 'Mozilla/5.0 (Linux; Android 11; KFRAPWI; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/134.0.6998.207 Safari/537.36' },
-      testMatch: ['**/webview.spec.ts', '**/fireos.spec.ts'],
+      testMatch: ['**/webview.spec.ts', '**/fireos.spec.ts', '**/privacy.spec.ts'],
     },
     {
       name: 'fire-hd-10',
       use: { viewport: { width: 800, height: 1280 }, deviceScaleFactor: 1.5, isMobile: true, hasTouch: true,
         userAgent: 'Mozilla/5.0 (Linux; Android 11; Fire tablet; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/134.0.6998.207 Safari/537.36' },
-      testMatch: ['**/webview.spec.ts', '**/fireos.spec.ts'],
+      testMatch: ['**/webview.spec.ts', '**/fireos.spec.ts', '**/privacy.spec.ts'],
     },
   ],
   webServer: {

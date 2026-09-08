@@ -469,3 +469,18 @@ svg { flex-shrink: 0; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }
+
+/* Required privacy information stays available offline, without a settings flow. */
+.library-footer { flex-wrap: wrap; }
+.privacy-link { border: 0; background: none; color: var(--green, #426849); min-height: 2.75rem; padding: .4rem .65rem; text-decoration: underline; text-underline-offset: .2em; font: inherit; font-weight: 600; cursor: pointer; }
+.privacy-dialog { width: min(46rem, calc(100vw - 2rem)); }
+.privacy-content { overflow-wrap: anywhere; }
+.privacy-content > h2 { margin-top: 0; }
+.privacy-intro, .privacy-content p { font-size: .92rem; line-height: 1.75; color: #465445; }
+.privacy-content h3 { margin: 1.7rem 0 .5rem; font-size: 1rem; color: #263c2e; }
+.privacy-content .privacy-draft { padding: 1rem; border: 1px solid #d4b862; border-radius: .75rem; background: #fff3d4; color: #5b461a; }
+.privacy-draft strong { display: block; }
+
+.privacy-link { font-size: .8rem; }
+.privacy-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.privacy-header h2 { margin: 0; }

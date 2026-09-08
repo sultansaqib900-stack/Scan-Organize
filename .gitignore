@@ -20,3 +20,11 @@ android/capacitor-cordova-android-plugins/
 *.keystore
 
 .arena/
+
+# Generated privacy assets are rebuilt from config/ before the static export.
+public/privacy.html
+public/privacy-release.json
+# Never commit user-supplied APKs, release signatures, or generated delivery archives.
+*.apk
+submission/*.zip
+submission/amazon/apk-report.json

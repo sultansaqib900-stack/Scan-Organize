@@ -1,0 +1,14 @@
+Scan & Organize is a one-time paid Fire tablet app. Payment happens in the Amazon Appstore before download. There are no IAP items, subscriptions, paywalls or sign-in screens inside the app. No special login or test account is needed for the scanner.
+
+Use a supported touchscreen Fire tablet with a camera: Fire OS 7/8 and a system WebView based on Chromium 111 or newer. Test with Amazon's stock software, without sideloaded Google services. Enable only models verified by the publisher. No Fire TV or Kindle e-reader build is supplied.
+
+1. Install the release build, enable airplane mode before the first app launch, and open it. The library starts with four empty folders; no sample documents ship in the app.
+2. Tap Scan document. Allow Camera, capture a plain test page, adjust the four corner handles, compare Clean color and Black & white, and choose Use this page. Alternatively, choose a JPEG/PNG/WebP test photo.
+3. Add another page. Drag the page grip to reorder it, retake a selected page or remove a thumbnail. Enter a document name, choose a folder and save.
+4. Create, rename and delete a folder. Deleting a populated folder moves documents to the default folder. Search by document name across folders.
+5. Open the saved document, swipe its pages and test rename/delete with dummy data. Relaunch and confirm the saved library remains.
+6. Export as PDF. The native save picker opens if available; otherwise native sharing is used. Verify an actual local PDF. Cancelling the picker must not start a share sheet. A save or permission failure must leave the document intact.
+7. From the library footer, open Privacy & support. Read the bundled policy offline and close it with the close control or device Back.
+8. Deny camera permission and confirm the explanation and photo-import alternative. Test background/resume, rotation, larger text, and a low-storage case.
+
+The source app does not integrate Google Play Services, Firebase, IAP, DRM or analytics SDKs. The publisher requests DRM disabled to preserve the offline-first design. Amazon's processing/signing/wrapper is a separate distribution step and must also be tested by the publisher.
