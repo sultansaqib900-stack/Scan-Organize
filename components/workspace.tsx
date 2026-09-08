@@ -9,6 +9,7 @@ import { DocumentViewer } from './document-viewer';
 import { DocumentSection, FolderSection, WelcomeCard } from './library';
 import { ScanFlow } from './scan-flow';
 import { Brand, Sidebar } from './sidebar';
+import { PrivacyView } from './privacy-view';
 import { Button, ConfirmDialog, ErrorMessage, IconButton, NameDialog, Toast } from './ui';
 
 type DialogState = { kind: 'new-folder' } | { kind: 'rename-folder' | 'delete-folder'; folder: Folder } | { kind: 'rename-document' | 'delete-document'; doc: ScanDocument } | null;
@@ -24,6 +25,7 @@ export function Workspace() {
   const [viewerId, setViewerId] = useState<string | null>(null);
   const [dialog, setDialog] = useState<DialogState>(null);
   const [toast, setToast] = useState('');
+  const [privacyOpen, setPrivacyOpen] = useState(false);
   const [offlineReady, setOfflineReady] = useState(false);
 
   const refresh = useCallback(async () => {
@@ -104,7 +106,7 @@ export function Workspace() {
           {!activeFolder && !search && <FolderSection folders={folders} documents={documents} onOpen={openFolder} onCreate={createFolder} onRename={selected => setDialog({ kind: 'rename-folder', folder: selected })} onDelete={selected => setDialog({ kind: 'delete-folder', folder: selected })} />}
           <DocumentSection documents={filtered} folders={folders} query={search} inFolder={Boolean(activeFolder)} onOpen={doc => setViewerId(doc.id)} onClearSearch={() => setQuery('')} onScan={startScan} />
         </>}
-        <footer className="library-footer"><LockKeyhole size={12} /><span>A little more organized. Entirely on your device.</span></footer>
+        <footer className="library-footer"><LockKeyhole size={12} /><span>A little more organized. Entirely on your device.</span><button type="button" className="privacy-link" onClick={() => setPrivacyOpen(true)}>Privacy &amp; support</button></footer>
       </main>
       <div className="mobile-scan-bar"><Button onClick={startScan} disabled={loading || Boolean(storageError)}><ScanLine size={20} />Scan document</Button></div>
     </div>
@@ -120,6 +122,7 @@ export function Workspace() {
     }} />}
     {dialog?.kind === 'rename-document' && <NameDialog title="Rename document" description="Make it a little easier to find next time." label="Document name" confirmLabel="Save name" initialValue={dialog.doc.name} onClose={closeDialog} onSubmit={async name => { await storage.renameDocument(dialog.doc.id, name); await refresh(); setToast('Document renamed.'); }} />}
     {dialog?.kind === 'delete-document' && <ConfirmDialog title="Delete this document?" description={<>“{dialog.doc.name}” and all {dialog.doc.pageIds.length} {dialog.doc.pageIds.length === 1 ? 'page' : 'pages'} will be permanently deleted from this device. This can’t be undone.</>} confirmLabel="Delete document" onClose={closeDialog} onConfirm={async () => { await storage.deleteDocument(dialog.doc.id); setViewerId(null); setDocuments(previous => previous.filter(doc => doc.id !== dialog.doc.id)); setToast('Document deleted from this device.'); }} />}
+    {privacyOpen && <PrivacyView onClose={() => setPrivacyOpen(false)} />}
     {toast && <Toast message={toast} onClose={closeToast} />}
   </div>;
 }

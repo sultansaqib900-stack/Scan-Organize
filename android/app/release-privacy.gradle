@@ -1,0 +1,31 @@
+// Release-only guard: a test/debug APK can show a clearly marked draft policy,
+// but a publishable APK must bundle the approved, current publisher information.
+def verifyReleasePrivacy = tasks.register('verifyReleasePrivacy') {
+    doLast {
+        def publisherFile = rootProject.file('../config/publisher.json')
+        def policyFile = rootProject.file('../config/privacy-policy.json')
+        def bundledFile = project.file('src/main/assets/public/privacy-release.json')
+        if (!publisherFile.exists() || !policyFile.exists() || !bundledFile.exists()) {
+            throw new GradleException('Privacy release assets are missing. Complete config/publisher.json and run npm run amazon:release before building a release APK.')
+        }
+        def parser = new groovy.json.JsonSlurper()
+        def publisher = parser.parse(publisherFile)
+        def bundled = parser.parse(bundledFile)
+        def required = ['publisherName', 'supportEmail', 'privacyPolicyUrl', 'effectiveDate']
+        if (required.any { !(publisher[it] instanceof String) || publisher[it].trim().isEmpty() } || publisher.policyApproved != true || bundled.ready != true) {
+            throw new GradleException('Release blocked: publisher contact, public privacy URL, effective date and policy approval are required. Do not submit a draft policy.')
+        }
+        def digest = java.security.MessageDigest.getInstance('SHA-256')
+        digest.update(publisherFile.bytes)
+        digest.update((byte) 0)
+        digest.update(policyFile.bytes)
+        def expectedHash = digest.digest().encodeHex().toString()
+        if (bundled.sourceSha256 != expectedHash || bundled.publisher != publisher) {
+            throw new GradleException('Bundled privacy information is stale. Run npm run amazon:release again, then rebuild and sign this APK.')
+        }
+    }
+}
+
+tasks.matching { it.name == 'preReleaseBuild' }.configureEach {
+    dependsOn verifyReleasePrivacy
+}

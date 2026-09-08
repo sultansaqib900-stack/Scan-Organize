@@ -28,6 +28,21 @@ Do not use `next start` or open `out/index.html` via `file://`. The preview serv
 - **Browser:** a new browser must first receive the static files (a local server works without internet). Once **Works offline** appears, all assets—including PDF code and fonts—are cached for offline reloads. A never-visited remote website cannot load offline.
 - Service workers are disabled in development and in Capacitor. Browser cache updates wait until all app tabs close; reopen after a new static build. APK upgrades never depend on this cache.
 
+## Amazon paid-download submission
+
+Start with [`submission/amazon/START-HERE.md`](submission/amazon/START-HERE.md). It includes plain-text listing copy, 114/512px icons, promotional artwork, privacy-label guidance and a checklist for the one-time paid listing. No IAP or payment SDK is required by this implementation.
+
+**Before a release build**, fill and approve `config/publisher.json` after reviewing `config/privacy-policy.json`. The app now has an offline **Privacy & support** view. `npm run amazon:release` validates those details before building/syncing; the native release task rejects missing/draft/stale privacy assets. Debug/browser previews may show a clearly marked draft. Host the generated `public/privacy.html` at your approved public HTTPS policy URL. Rebuild any APK made before this update.
+
+```sh
+npm run amazon:release
+npm run amazon:assets
+npm run amazon:apk-check -- /path/to/signed-release.apk
+npm run amazon:submission-check
+```
+
+The APK checker requires local Android SDK tools; it does not upload or execute your APK. No actual APK/signature, Fire hardware, Amazon-processed artifact, or public policy URL has been verified here. Price, publisher identity, support contact, policy approval and screenshots are intentionally not invented. See the submission pack for the remaining gates.
+
 ## Build the Amazon Fire tablet APK
 
 The `android/` project is included. Install Android Studio, **JDK 21**, and **Android SDK 36**. Release target: **Fire OS 7/8 (API 28+) with Amazon System WebView based on Chromium 111+**. Fire OS alone does not establish WebView compatibility. Fire TV/Stick, Kindle e-readers and Fire OS 5/6 are not supported by this build. Tooling installation may need internet; the installed app does not.
@@ -85,7 +100,7 @@ npm run test:e2e      # includes Fire-sized touch/bridge contracts
 npm run test:fire     # Fire profiles only
 ```
 
-Verified here: **40 unit tests and 31 browser/native-bridge contract tests**, static export, TypeScript, ESLint, accessibility, offline reload/PDF, camera lifecycle, touch crop/reorder/swipe, storage failure/retry and real PDF contents. The full end-to-end suite passed on Chromium 111, including Fire HD 8/10-sized profiles. Dependency audit reported no vulnerabilities.
+Verified here: **51 unit tests and 37 browser/native-bridge contract tests**, static export, TypeScript, ESLint, accessibility, offline reload/PDF, camera lifecycle, touch crop/reorder/swipe, storage failure/retry and real PDF contents. The full end-to-end suite passed on Chromium 111, including Fire HD 8/10-sized profiles. Dependency audit reported no vulnerabilities.
 
 **Real Fire/Android compilation and device testing was not possible here** (no JDK, SDK, emulator or device). The tests use the real Capacitor JavaScript bridge in Chromium with simulated OS responses, not Amazon System WebView or a real file picker. Run the included [native instrumentation tests](docs/ANDROID-TESTING.md) and the [stock-Fire/Amazon-processed-APK release gate](docs/AMAZON-APPSTORE.md) before shipping. Amazon documents store-added Appstore communication/analytics even with DRM disabled; our analytics-free source is not a guarantee about its processed APK. [5](https://developer.amazon.com/docs/app-submission/understanding-submission.html)
 

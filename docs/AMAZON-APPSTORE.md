@@ -24,6 +24,14 @@ Useful physical validation candidates—not certified devices—are Fire HD 8 (2
 - No Google Drive or third-party PDF viewer is needed when a local system save provider is available. If neither local saving nor sharing is usable on a stock model, do **not** mark that model supported until resolved. Android SEND support does not establish that an offline file-saving destination is installed. [2](https://developer.amazon.com/docs/fire-tablets/ft-supported-android-intents.html)
 - PDFs cross the JS/native bridge in **256 KiB binary chunks**, and the native cache-to-destination copy streams with a **64 KiB buffer**. This avoids another full-PDF base64 allocation in the native heap. The JS PDF generation/page limits still apply; run large-document tests on lower-memory Fire tablets.
 
+## Prepared submission materials
+
+See [`../submission/amazon/START-HERE.md`](../submission/amazon/START-HERE.md) for the ready-to-review listing copy, store artwork, paid-download console settings, privacy questionnaire worksheet and explicit remaining gates.
+
+The app now includes an offline Privacy & support view. Complete and approve `config/publisher.json` and the shared policy before producing a release; `npm run amazon:release` builds/syncs those assets. The native release task checks the generated policy fingerprint to reject stale or draft publisher details. This Gradle guard has not been compiled/run here; source checks are not an Android build.
+
+Do not reuse an APK from before that privacy update. No release APK was attached in this environment, and the public policy URL, signature, native dialogs and real screenshots remain unverified.
+
 ## Build and submission
 
 Install Node 22+, JDK 21 and Android SDK 36 (Android Studio is the easiest setup).

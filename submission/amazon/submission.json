@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "preparedOn": "2026-09-08",
+  "app": {
+    "packageName": "app.scanandorganize.documents",
+    "versionName": "1.0",
+    "versionCode": 1,
+    "locale": "en-US",
+    "category": "Productivity",
+    "deviceFamily": "Fire tablets",
+    "minSdk": 28,
+    "targetSdk": 36,
+    "minChromiumWebView": 111
+  },
+  "monetization": {
+    "model": "paid-upfront",
+    "basePrice": null,
+    "currency": null,
+    "inAppPurchases": false,
+    "subscriptions": false,
+    "advertisingSdk": false,
+    "automaticDrm": "No",
+    "paidSettingConfirmedInConsole": false
+  },
+  "publication": {
+    "countries": [],
+    "publisherAccountPaymentTaxSetupComplete": false,
+    "contentRatingQuestionnaireReviewed": false,
+    "privacyQuestionnaireReviewed": false,
+    "publicPrivacyUrlChecked": false,
+    "fireDeviceTestsPassed": false,
+    "amazonProcessedBuildTested": false
+  },
+  "apk": {
+    "path": null,
+    "sha256": null,
+    "report": "apk-report.json"
+  },
+  "screenshots": []
+}

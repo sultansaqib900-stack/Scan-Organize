@@ -1,0 +1,1 @@
+Initial release: camera and photo scanning, manual perspective crop, scan cleanup, multi-page review, folders, name search, document viewing, native PDF export, and offline privacy information.

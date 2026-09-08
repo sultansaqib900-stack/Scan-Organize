@@ -1,0 +1,60 @@
+{
+  "appName": "Scan & Organize",
+  "sections": [
+    {
+      "title": "Who provides this app",
+      "paragraphs": [
+        "Scan & Organize is provided by {{publisherName}}. This policy explains the document-scanning app's handling of your information. Contact: {{supportEmail}}.",
+        "Effective date: {{effectiveDate}}. Amazon operates the Appstore and purchase process separately, as explained below."
+      ]
+    },
+    {
+      "title": "Your scans and document library",
+      "paragraphs": [
+        "The app processes camera frames, photos you choose, cropped page images, thumbnails, document and folder names, page order, and document dates to provide scanning, organization and PDF export. Your scans can contain personal or sensitive information, depending on what you photograph or import.",
+        "The document library is stored locally in the app's on-device storage, using IndexedDB for documents and images and localStorage for small folder metadata. Draft pages remain in memory until you save them. Search runs locally; the app does not maintain a separate search-history log.",
+        "The scanning and library functions do not upload your documents to the publisher's servers or an automatic cloud-sync service. The publisher does not operate a backend for those functions. There is no OCR or automatic extraction of identity, financial or medical fields from your scans."
+      ]
+    },
+    {
+      "title": "Camera and file access",
+      "paragraphs": [
+        "Camera access is requested when you open the scanner. It is used for the live preview and page capture. The app does not record audio or save videos. Camera capture stops after taking a page, when leaving the scanner, or when the app is backgrounded.",
+        "You can deny or revoke camera permission in your device settings and choose an existing photo instead, subject to the device's file-picker and profile restrictions. Photo import uses the item you select, rather than permission to browse all of your device's files."
+      ]
+    },
+    {
+      "title": "PDF exports and other applications",
+      "paragraphs": [
+        "Export as PDF creates a PDF in the app's private export cache, then requests a local destination through the system file picker. If a system save picker is unavailable, the app uses the native share sheet. The app does not silently switch destinations after a cancellation or save failure.",
+        "Saving or sharing gives the file provider or application you select access to the exported PDF. That provider or application may store, transmit or back it up under its own practices. A local-only destination is requested for the save picker, but you should still check the destination you choose. Other applications' behavior is outside Scan & Organize's control.",
+        "A private cached export can remain until the device clears that cache. Files already exported to a chosen location or another application are separate copies; deleting the original scan does not delete those copies."
+      ]
+    },
+    {
+      "title": "Storage, deletion and security",
+      "paragraphs": [
+        "You can delete a document and its stored pages from the document viewer. Deleting a folder moves its documents to the default folder instead of deleting them. Manage exported copies in the location or application where you saved or shared them.",
+        "Clearing this app's storage or uninstalling it removes its local library and private cache. Unsaved drafts can be lost if the operating system closes the app. Device loss, storage failure or data clearing can also remove scans. The publisher cannot recover an on-device library, so export important documents.",
+        "The supplied app disables automatic app-data backup and device transfer in its Android manifest. Device and store behavior must still be considered separately. The app relies on the device's application sandbox and device protection; it does not add its own document encryption, password lock or encrypted PDFs. No storage method can be guaranteed completely secure."
+      ]
+    },
+    {
+      "title": "Purchases, analytics and Amazon services",
+      "paragraphs": [
+        "This is a one-time paid Appstore app. Amazon handles payment before download. The app does not request payment-card details, offer subscriptions or in-app purchases, or require an account inside the scanner.",
+        "The publisher's application code does not integrate advertising, analytics, crash-upload, tracking, login or license-verification SDKs. It does not sell document data or automatically send scans to Amazon or to the publisher.",
+        "Amazon documents that its distribution process can add code that communicates with the Appstore client, including Appstore analytics and policy enforcement, even when optional DRM is disabled. Amazon may process store, device or usage information under its own privacy notices. An analytics-free source project is not a guarantee of no store- or device-level processing. Review Amazon's privacy information and your device settings for these separate services."
+      ]
+    },
+    {
+      "title": "Support and policy updates",
+      "paragraphs": [
+        "If you email {{supportEmail}}, the publisher and email providers receive your email address and the information you choose to include. The publisher uses that information to respond to your request and handle necessary support records. Avoid sending sensitive scans, passwords, payment-card details or identity documents in support messages.",
+        "Contact the publisher to ask about support information you have provided. On-device scans are managed through the app and device controls described above; they are not available to the publisher for remote deletion or recovery.",
+        "This is a general-purpose document tool, not a child-directed service. The app does not ask for age or create child accounts. Device parental controls may restrict the camera, picker or sharing functions.",
+        "The publisher may update this policy when the app or its practices change. The public policy at {{privacyPolicyUrl}} will show its effective date. A copy is bundled with the app so this information remains readable offline."
+      ]
+    }
+  ]
+}
