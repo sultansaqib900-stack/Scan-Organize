@@ -1,0 +1,11 @@
+import { Folder, LayoutGrid, Plus, ScanLine, ShieldCheck } from 'lucide-react';
+import { Folder as FolderType, ScanDocument } from '@/lib/model';
+import { IconButton } from './ui';
+
+export function Brand({ compact = false }: { compact?: boolean }) {
+  return <div className={`brand ${compact ? 'compact' : ''}`}><span className="brand-mark"><ScanLine size={26} strokeWidth={1.8} /></span><div><strong>Scan & Organize<span className="brand-dot">.</span></strong>{!compact && <span>A LITTLE LESS PAPER.</span>}</div></div>;
+}
+
+export function Sidebar({ folders, documents, activeFolder, onHome, onFolder, onCreate }: { folders: FolderType[]; documents: ScanDocument[]; activeFolder: string | null; onHome: () => void; onFolder: (id: string) => void; onCreate: () => void }) {
+  return <aside className="sidebar"><button type="button" className="brand-home" onClick={onHome} aria-label="Scan & Organize home"><Brand /></button><nav className="sidebar-nav" aria-label="Library"><button type="button" className={`nav-item library-nav ${activeFolder === null ? 'active' : ''}`} onClick={onHome} aria-current={activeFolder === null ? 'page' : undefined}><LayoutGrid size={19} /><span>My library</span><span className="nav-count">{documents.length}</span></button><div className="nav-section-label"><span>YOUR FOLDERS</span><IconButton aria-label="Create a new folder" onClick={onCreate}><Plus size={16} /></IconButton></div><div className="sidebar-folder-list">{folders.map(folder => <button type="button" className={`nav-item ${activeFolder === folder.id ? 'active' : ''}`} onClick={() => onFolder(folder.id)} key={folder.id} aria-current={activeFolder === folder.id ? 'page' : undefined}><Folder size={18} className={`nav-folder-icon ${folder.color}`} /><span>{folder.name}</span><span className="nav-count">{documents.filter(doc => doc.folderId === folder.id).length}</span></button>)}</div></nav><div className="sidebar-bottom"><div className="privacy-card"><span className="privacy-card-icon"><ShieldCheck size={23} strokeWidth={1.6} /></span><h3>Yours. And only yours.</h3><p>No cloud, no accounts.<br />Just your documents, right here.</p><span className="private-status"><span />100% on-device</span></div><div className="sidebar-footnote"><span>Less clutter. More clarity.</span><span>v1.0</span></div></div></aside>;
+}
