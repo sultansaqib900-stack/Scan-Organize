@@ -19,7 +19,8 @@ async function base64(blob: Blob): Promise<string> {
   });
 }
 
-export async function writePdfToCache(blob: Blob, fileName: string): Promise<string> {
+/** Streams any export into the private cache. Chunked for the same reason as PDFs. */
+export async function writeExportToCache(blob: Blob, fileName: string): Promise<string> {
   if (!blob.size) throw new Error('The PDF is empty. Please try exporting again.');
   const { Filesystem, Directory } = await import('@capacitor/filesystem');
   const path = `exports/${Date.now()}-${fileName}`;
@@ -40,6 +41,9 @@ export async function writePdfToCache(blob: Blob, fileName: string): Promise<str
     throw error;
   }
 }
+
+/** Retained name: the PDF path is the original and most common caller. */
+export const writePdfToCache = writeExportToCache;
 
 export async function savePdfNatively(sourceUri: string, fileName: string): Promise<NativeSaveStatus> {
   if (Capacitor.getPlatform() !== 'android' || !Capacitor.isPluginAvailable('PdfSave')) return 'unavailable';

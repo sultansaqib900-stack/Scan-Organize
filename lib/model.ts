@@ -25,6 +25,8 @@ export interface ScanPage {
   image: Blob;
   width: number;
   height: number;
+  /** SHA-256 of the stored image bytes. Optional: pages saved before v2 lack it. */
+  sha256?: string;
 }
 export type DraftPage = Omit<ScanPage, 'documentId'>;
 export interface Point { x: number; y: number }

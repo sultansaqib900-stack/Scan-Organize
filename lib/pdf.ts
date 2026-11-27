@@ -27,9 +27,12 @@ export async function buildPdf(doc: Pick<ScanDocument, 'name'>, pages: ScanPage[
 
 export type ExportResult = 'saved' | 'native' | 'shared' | 'downloaded' | 'cancelled';
 
-export async function exportAsPdf(doc: ScanDocument, pages: ScanPage[]): Promise<ExportResult> {
-  const blob = await buildPdf(doc, pages);
-  const name = pdfFilename(doc.name);
+/**
+ * Delivers a locally built PDF. Shared by document export and the custody
+ * receipt so both take the exact same native save → share → (browser only)
+ * download path, including cancel/failure semantics.
+ */
+export async function deliverBlob(blob: Blob, fileName: string, title: string): Promise<ExportResult> {
   if (Capacitor.isNativePlatform()) {
     // NEVER use an anchor/download fallback inside a WebView. Android cannot
     // reliably save blob: URLs, and the user expects the system share sheet.
@@ -38,17 +41,17 @@ export async function exportAsPdf(doc: ScanDocument, pages: ScanPage[]): Promise
     if (!Capacitor.isPluginAvailable('Filesystem') || (!canSave && !canShare)) {
       throw new Error('Native PDF sharing is unavailable. Run npm run amazon:sync and rebuild the Fire tablet app. Your document is still safely saved.');
     }
-    const uri = await writePdfToCache(blob, name);
+    const uri = await writePdfToCache(blob, fileName);
     // Prefer the system's local Save dialog on Fire tablets. This does not need
     // Google Drive, a PDF viewer, or an installed third-party share destination.
-    const saveResult = await savePdfNatively(uri, name);
+    const saveResult = await savePdfNatively(uri, fileName);
     if (saveResult === 'saved' || saveResult === 'cancelled') return saveResult;
     // Fall back only when a system picker is unavailable, NEVER on user cancel
     // or a disk/permission failure. Both paths remain fully native.
     if (!canShare) throw new Error('No native PDF save or share option is available on this device. Your document is still saved.');
     const { Share } = await import('@capacitor/share');
     try {
-      await Share.share({ title: doc.name, files: [uri], dialogTitle: 'Export as PDF' });
+      await Share.share({ title, files: [uri], dialogTitle: 'Export as PDF' });
     } catch (error) {
       if (error instanceof Error && /cancel/i.test(error.message)) return 'cancelled';
       throw error;
@@ -57,10 +60,10 @@ export async function exportAsPdf(doc: ScanDocument, pages: ScanPage[]): Promise
     // Android can clear this cache; no shared-storage permission is necessary.
     return 'native';
   }
-  const file = new File([blob], name, { type: 'application/pdf' });
+  const file = new File([blob], fileName, { type: 'application/pdf' });
   if (navigator.canShare?.({ files: [file] }) && navigator.share) {
     try {
-      await navigator.share({ title: doc.name, files: [file] });
+      await navigator.share({ title, files: [file] });
       return 'shared';
     } catch (error) {
       if (error instanceof Error && error.name === 'AbortError') return 'cancelled';
@@ -70,8 +73,13 @@ export async function exportAsPdf(doc: ScanDocument, pages: ScanPage[]): Promise
   }
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
-  link.href = url; link.download = name; link.style.display = 'none';
+  link.href = url; link.download = fileName; link.style.display = 'none';
   document.body.appendChild(link); link.click(); link.remove();
   setTimeout(() => URL.revokeObjectURL(url), 60_000);
   return 'downloaded';
+}
+
+export async function exportAsPdf(doc: ScanDocument, pages: ScanPage[]): Promise<ExportResult> {
+  const blob = await buildPdf(doc, pages);
+  return deliverBlob(blob, pdfFilename(doc.name), doc.name);
 }
